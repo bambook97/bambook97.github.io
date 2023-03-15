@@ -5,6 +5,10 @@ const emptyList = document.querySelector('#emptyList');
 
 form.addEventListener('submit', addTask);
 
+tasksList.addEventListener('click', deleteTask);
+
+tasksList.addEventListener('click', doneTask);
+
 function addTask(event) {
     event.preventDefault();
 
@@ -33,3 +37,22 @@ function addTask(event) {
          emptyList.classList.add('none');
      }
 };
+
+function deleteTask(event) {
+    if (event.target.dataset.action === 'delete'){
+        const parentNode = event.target.closest('li');
+        parentNode.remove();
+    }
+    if(tasksList.children.length === 1) {
+        emptyList.classList.remove('none');
+    }
+};
+
+function doneTask(event) {
+    if(event.target.dataset.action === "done") {
+        const parentNode = event.target.closest('.list-group-item');
+        const taskTitle = parentNode.querySelector('.task-title');
+        taskTitle.classList.toggle('task-title--done');
+    }
+};
+
