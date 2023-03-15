@@ -3,11 +3,17 @@ const taskInput = document.querySelector('#taskInput');
 const tasksList = document.querySelector('#tasksList');
 const emptyList = document.querySelector('#emptyList');
 
+
+
 form.addEventListener('submit', addTask);
 
 tasksList.addEventListener('click', deleteTask);
 
 tasksList.addEventListener('click', doneTask);
+
+tasksList.addEventListener('click', markTask);
+
+
 
 function addTask(event) {
     event.preventDefault();
@@ -19,6 +25,9 @@ function addTask(event) {
          <div class="task-item__buttons">
              <button type="button" data-action="done" class="btn-action">
                  <img src="./img/tick.svg" alt="Done" width="18" height="18">
+             </button>
+             <button type="button" data-action="mark" class="btn-action">
+                <img src="./img/important.png" alt="Done" width="18" height="18">
              </button>
              <button type="button" data-action="delete" class="btn-action">
                  <img src="./img/cross.svg" alt="Done" width="18" height="18">
@@ -55,4 +64,16 @@ function doneTask(event) {
         taskTitle.classList.toggle('task-title--done');
     }
 };
+
+function markTask(event) {
+    if(event.target.dataset.action === "mark") {
+        const parentNode = event.target.closest('.list-group-item');
+        const taskTitle = parentNode.querySelector('.task-title');
+        taskTitle.classList.toggle('task-title--important');
+    }
+};
+
+
+
+
 
